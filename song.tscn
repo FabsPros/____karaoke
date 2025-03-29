@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgt8yfv2pfimx"]
+[gd_scene load_steps=3 format=3 uid="uid://cgt8yfv2pfimx"]
 
 [ext_resource type="Script" path="res://song.gd" id="1_ugsx5"]
+[ext_resource type="Texture2D" uid="uid://d2ie62mpmgrix" path="res://images/pexels-pixabay-220067.jpg" id="2_8qx4w"]
 
 [node name="song" type="Control"]
 layout_mode = 3
@@ -18,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0164014, 0.0159998, 0.114046, 1)
+color = Color(0.168627, 0.0235294, 0.117647, 1)
 
 [node name="scanthecode" type="Label" parent="ColorRect2"]
 layout_mode = 1
@@ -29,8 +30,21 @@ offset_left = -58.0
 offset_right = 58.0
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.933333, 0.839216, 1)
 theme_override_font_sizes/font_size = 35
 text = "Scan the code!"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.0588235)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8qx4w")
+expand_mode = 2
+stretch_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -55,10 +69,12 @@ theme_override_constants/margin_left = 100
 
 [node name="firstLine" type="Label" parent="MarginContainer/lines/MarginContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
-text = "GET READY LETS GO"
+theme_override_colors/font_color = Color(1, 0.933333, 0.839216, 1)
+theme_override_font_sizes/font_size = 35
+text = "GET READY"
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/lines"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 100
 
@@ -72,7 +88,9 @@ layout_mode = 2
 stretch_mode = 5
 
 [node name="changeLineTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 2.0
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="timeout" from="changeLineTimer" to="." method="_on_change_line_timer_timeout"]
