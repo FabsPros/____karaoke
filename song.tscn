@@ -44,6 +44,35 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 150
 theme_override_constants/margin_bottom = 50
 
+[node name="lines" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/lines"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+
+[node name="firstLine" type="Label" parent="MarginContainer/lines/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "GET READY LETS GO"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/lines"]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+
+[node name="secondLine" type="Label" parent="MarginContainer/lines/MarginContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "3 2 1"
+
 [node name="qrcode" type="TextureRect" parent="MarginContainer"]
 layout_mode = 2
 stretch_mode = 5
+
+[node name="changeLineTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="timeout" from="changeLineTimer" to="." method="_on_change_line_timer_timeout"]
