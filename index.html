@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 id="sentence">dsdsds</h2>
+        <input type="text" id="word1" placeholder="Enter word 1" maxlength="10">
+    <button id ="subm1">Submit</button>
+    <input type="text" id="word2" placeholder="Enter word 2" maxlength="10">
+    <input type="button" id="subm2" value="Submit"> 
+    <p class="output" id="outp1">ddfd</p>
+    <script>
+        const baseUrl = 'http://localhost:3000';
+        let dict = {}; 
+        let randomIndex = null; 
+        
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const itemResponse = await fetch(`${baseUrl}/get-item`);
+                const itemData = await itemResponse.json();
+
+                if (itemData.item == null) {
+                    console.log(document.getElementById('sentence').innerHTML)
+                    document.getElementById('sentence').innerHTML = "No more sentences available 😢"
+                    document.getElementById('word1').disabled = true;
+                    document.getElementById('word2').disabled = true;
+                    document.getElementById('subm1').disabled = true;
+                    document.getElementById('subm2').disabled = true;
+                } 
+                
+                if (itemData.error) {
+                    document.getElementById('sentence').innerHTML = 
+                        `<p style="color: red;">${itemData.error}</p>`;
+                } 
+
+                document.getElementById('sentence').innerHTML = itemData.item;
+
+                if ( document.getElementById('sentence').innerHTML === "undefined") {
+                    document.getElementById('sentence').innerHTML = "No more sentences available 😢"
+                    document.getElementById('word1').disabled = true;
+                    document.getElementById('word2').disabled = true;
+                    document.getElementById('subm1').disabled = true;
+                    document.getElementById('subm2').disabled = true;
+                } 
+
+                randomIndex = itemData.item; 
+                currentItemId = itemData.itemId; 
+
+                dict[randomIndex] = {
+                    word1: '',
+                    word2: ''
+                };
+              
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('sentence').innerHTML = 
+                    `<p style="color: red;">Error loading item. Please refresh the page.</p>`;
+            }
+        });
+
+        async function saveResponse(wordType, value) {
+        try {
+            const response = await fetch(`${baseUrl}/save-response`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    itemId: currentItemId,
+                    [wordType]: value
+                })
+            });
+            const result = await response.json();
+            if (!result.success) {
+                console.error('Failed to save:', result);
+            }
+        } catch (error) {
+            console.error('Error saving:', error);
+        }
+        }
+
+        function read_word1() {
+            dict[randomIndex].word1 = document.getElementById('word1').value;
+            console.log(dict);
+            const word1 = document.getElementById('word1').value;
+            saveResponse('word1', word1);
+        }
+        document.getElementById('subm1').onclick = read_word1;
+        
+        function read_word2() {
+            dict[randomIndex].word2 = document.getElementById('word2').value;
+            console.log(dict);
+            const word2 = document.getElementById('word2').value;
+            saveResponse('word2', word2);
+            document.getElementById("outp1").innerHTML = dict[randomIndex].word2;
+        }
+        document.getElementById('subm2').onclick = read_word2;
+        
+    </script>
+</body>
+</html>
