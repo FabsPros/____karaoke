@@ -95,11 +95,11 @@ func players_joined():
 	lines.visible = true
 	audio.play()
 	
-func readJSON(json):
-	#var file = FileAccess.open("res://responses.json", FileAccess.READ)
-	#assert(file.file_exists("res://responses.json"), "File doesn't exist")
-	#
-	#var json = file.get_as_text()
+func readJSON():
+	var file = FileAccess.open("res://offlinejson/responses.json", FileAccess.READ)
+	assert(file.file_exists("res://responses.json"), "File doesn't exist")
+	
+	var json = file.get_as_text()
 	var json_object = JSON.new()
 	
 	json_object.parse(json)
@@ -134,3 +134,7 @@ func _on_fetch_pressed() -> void:
 
 func _on_start_pressed() -> void:
 	players_joined()
+
+
+func _on_fetch_local_pressed() -> void:
+	readJSON()

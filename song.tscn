@@ -103,6 +103,17 @@ grow_horizontal = 0
 grow_vertical = 2
 text = "fetch json"
 
+[node name="fetchLocal" type="Button" parent="MarginContainer/qrcode"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -4.0
+offset_right = 8.0
+offset_bottom = 4.0
+grow_vertical = 2
+text = "fetch local"
+
 [node name="start" type="Button" parent="MarginContainer/qrcode"]
 layout_mode = 1
 anchors_preset = 7
@@ -127,5 +138,6 @@ one_shot = true
 timeout = 10.0
 
 [connection signal="pressed" from="MarginContainer/qrcode/fetch" to="." method="_on_fetch_pressed"]
+[connection signal="pressed" from="MarginContainer/qrcode/fetchLocal" to="." method="_on_fetch_local_pressed"]
 [connection signal="pressed" from="MarginContainer/qrcode/start" to="." method="_on_start_pressed"]
 [connection signal="timeout" from="changeLineTimer" to="." method="_on_change_line_timer_timeout"]
