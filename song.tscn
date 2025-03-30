@@ -85,7 +85,37 @@ text = "3 2 1"
 
 [node name="qrcode" type="TextureRect" parent="MarginContainer"]
 layout_mode = 2
+expand_mode = 1
 stretch_mode = 5
+
+[node name="fetch" type="Button" parent="MarginContainer/qrcode"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -15.5
+offset_right = 12.0
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "fetch json"
+
+[node name="start" type="Button" parent="MarginContainer/qrcode"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = -31.0
+offset_right = 42.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "START SONG"
 
 [node name="changeLineTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -96,4 +126,6 @@ one_shot = true
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 timeout = 10.0
 
+[connection signal="pressed" from="MarginContainer/qrcode/fetch" to="." method="_on_fetch_pressed"]
+[connection signal="pressed" from="MarginContainer/qrcode/start" to="." method="_on_start_pressed"]
 [connection signal="timeout" from="changeLineTimer" to="." method="_on_change_line_timer_timeout"]

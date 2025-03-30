@@ -35,7 +35,6 @@ func _ready() -> void:
 	# WEB STUFF
 	#print(HTTPRequester.request("https://httpbin.org/get"
 	test_connection()
-	httprequest()
 	# -------------------
 	var img_texture
 	var file
@@ -48,8 +47,8 @@ func _ready() -> void:
 	qrcode.texture = img_texture
 	text = file.get_as_text()
 	#text = text.split("\r\n")
-	await get_tree().create_timer(3).timeout
-	players_joined()
+	#await get_tree().create_timer(3).timeout
+	#players_joined()
 	
 ## WEB STUFF
 func _on_request_completed(result, response_code, headers, body):
@@ -77,7 +76,8 @@ func _on_request_completed(result, response_code, headers, body):
 		if parse_error == OK:
 			var data: Dictionary = json.get_data()
 			# Now you can use it as a dictionary!
-			print(data["1"])  # Access like any dictionary
+			#print(data["0"])  # Access like any dictionary
+			print("success")
 			json_data = data
 		else:
 			print("JSON Parse Error:", json.get_error_message(), "at line", json.get_error_line())
@@ -126,3 +126,11 @@ func _on_change_line_timer_timeout() -> void: # USE REPLACE TO REPLACE
 			changeLineTimer.start()
 			if lineNumb % 5 == 0:
 				chunkNumb += 1
+
+
+func _on_fetch_pressed() -> void:
+	httprequest()
+
+
+func _on_start_pressed() -> void:
+	players_joined()

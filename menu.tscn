@@ -98,7 +98,7 @@ theme_override_constants/margin_bottom = 50
 
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2/MarginContainer"]
 layout_mode = 2
-text = "song"
+text = "I kissed a girl"
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -110,6 +110,6 @@ theme_override_constants/margin_bottom = 50
 
 [node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2/MarginContainer2"]
 layout_mode = 2
-text = "SONG"
+text = "Tik Tok"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/MarginContainer/callmemaybe" to="." method="_on_callmemaybe_pressed"]
