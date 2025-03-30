@@ -70,7 +70,7 @@ theme_override_constants/margin_left = 100
 [node name="firstLine" type="Label" parent="MarginContainer/lines/MarginContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.933333, 0.839216, 1)
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 40
 text = "GET READY"
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/lines"]
@@ -92,5 +92,8 @@ wait_time = 2.0
 one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+timeout = 10.0
 
 [connection signal="timeout" from="changeLineTimer" to="." method="_on_change_line_timer_timeout"]
