@@ -133,6 +133,7 @@ func _on_fetch_pressed() -> void:
 
 
 func _on_start_pressed() -> void:
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	players_joined()
 
 
